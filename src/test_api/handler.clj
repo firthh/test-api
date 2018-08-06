@@ -51,11 +51,27 @@
                            (Thread/sleep 5000)
                            {:result (+ x y)})))
 
+                (OPTIONS "/plus" []
+                         :return s/Str
+                         :summary "Responds to any HTTP verb"
+                         (ok ""))
+
+                (HEAD "/plus" []
+                         :return s/Str
+                         :summary "HEAD request"
+                         (ok ""))
+
                 (GET "/plus" []
                      :return {:result Long}
                      :query-params [x :- Long, y :- Long]
                      :summary "adds two numbers together"
                      (ok {:result (+ x y)}))
+
+                (DELETE "/resource/:id" [id]
+                     :return {:result s/Str}
+                     :query-params []
+                     :summary "Deletes a resource"
+                     (ok {:result "OK"}))
 
                 (POST "/echo" []
                       :return Pizza
